@@ -1,7 +1,7 @@
    var getUsers = function(){
 		$.ajax({
                    type: "GET",
-		   url: 'http://localhost:8080/bootapp/user/get',
+		   url: 'http://localhost:8080/bootapp/user',
 		   success: function(data) {
 			jQuery.each(data, function(i, val) {
                               var sexvar = '<td>男</td>';  
@@ -36,7 +36,7 @@
             var user = {'name': name, 'sex': sex, 'age': age };
 	    $.ajax({
                    type: "POST",
-		   url: 'http://localhost:8080/bootapp/user/add',
+		   url: 'http://localhost:8080/bootapp/user',
                    contentType:"application/json",     
                    data: JSON.stringify(user), 
 		   success: function() {
@@ -53,9 +53,8 @@
 
    var deleteUsersSubmit = function(idx){
 	    $.ajax({
-                   type: "POST",
-		   url: 'http://localhost:8080/bootapp/user/delete',
-                   data: {"id":idx}, 
+                   type: "DELETE",
+		   url: 'http://localhost:8080/bootapp/user/'+idx,
 		   success: function() {
 			$(window).attr('location','index.html');
 		   },
@@ -75,7 +74,7 @@
    var getUsersById = function(idx){
 		$.ajax({
                    type: "GET",
-		   url: 'http://localhost:8080/bootapp/user/get/'+idx,
+		   url: 'http://localhost:8080/bootapp/user/'+idx,
 		   success: function(data) {
                         $('#item_id').val(data.id);
                         $('#item_name').val(data.name);
@@ -104,8 +103,8 @@
 	    }  
             var user = {'id':id, 'name': name, 'sex': sex, 'age': age };
 	    $.ajax({
-                   type: "POST",
-		   url: 'http://localhost:8080/bootapp/user/update',
+                   type: "PUT",
+		   url: 'http://localhost:8080/bootapp/user',
                    contentType:"application/json",     
                    data: JSON.stringify(user), 
 		   success: function() {
